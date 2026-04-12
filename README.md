@@ -33,6 +33,33 @@ The project commenced with the deployment of Microsoft Sentinel in the Project-w
 
 ![image](Images/SEN.png)
 
+Afterwards, Azure Bastion logs is forwarded to the Sentinel-integrated workspace via diagnostic settings (Project-BST-logs)
+
+![image](Images/BSTL.png)
+
+The Azure Bastion logs are stored in the MicrosoftAzureBastionAuditLogs table in the Sentinel-integrated workspace. It was confirmed that the workspace is now receiving logs from Azure Bastion.
+
+![image](Images/BSTL2.png)
+
+Additionally, Azure activity log which stores the event carried out in the Azure subscription including any updates made on the firewallis forwarded to the sentinel-integrated workspace via Azure Activity connector. The process started with the installation of Azure Activity from content hub and culminated with the configuration of the connector.
+
+![image](Images/AzAC.png)
+
+The Azure activity logs are now visible from the sentinel-integrated workspace as shown below.
+
+![image](Images/AAL.png)
+
+To ingest the logs from the virtual machines to the sentinel-integrated workspace, Window Security Event solution is installed from Content hub.
+
+![image](Images/WSE.png)
+
+Then the Windows Security Event via Azure Monitor Agent (AMA), is configured through the connectors page.
+
+![image](Images/WSE2.png)
+
+A significant step in the configuration of the connector is the creation of a data collection rule (DCR) 
+this allows for the specyfing of the 
+![image](Images/VM2M.png)
 
 ## Findings and Recommendations
 

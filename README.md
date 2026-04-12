@@ -58,8 +58,21 @@ Then the Windows Security Event via Azure Monitor Agent (AMA), is configured thr
 ![image](Images/WSE2.png)
 
 A significant step in the configuration of the connector is the creation of a data collection rule (DCR) 
-this allows for the specyfing of the 
+this allows for the specyfing of the target resources (VMs) and the events to collect from it.
+
 ![image](Images/VM2M.png)
+
+The completion of DCR automatically installs a AzureMonitorWindowsAgent extension on the VMs.
+
+![image](Images/SUC2.png)
+
+Note: If the DCR is created within the Microsoft Sentinel theWindows event log data will be stored in the SecurityEvent table, but if the DCR is created in the DCRs environment the event will be stored in the Event table without specialized security solution.
+
+With the completion of the configuration of the connector, the staus of the connector now changes to connected, meaning, the agents are now installed on the target resources and are now ready to start collecting logs for fowarding to the Sentinel-integrated workspace. The images also features both the table management and DCR properties.
+
+After the configuration was completed, I noticed the workspace wasn't receving logs despite the status of the connector showing connected. With my fervent troubleshoot, I realised the VMs are
+
+![image](Images/SC-WSE.png)
 
 ## Findings and Recommendations
 

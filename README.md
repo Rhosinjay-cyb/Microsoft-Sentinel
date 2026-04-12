@@ -31,6 +31,8 @@ This project builds upon a previously concluded project on Azure Firewall, and i
 
 The project commenced with the deployment of Microsoft Sentinel in the Project-workspace (this log analytics workspace was created in the last project and it already contains the Azure Firewall logs).  
 
+![image](Images/SEN.png)
+
 
 ## Findings and Recommendations
 

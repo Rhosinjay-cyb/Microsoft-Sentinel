@@ -8,7 +8,7 @@ The aim of this project is to deploy Microsoft Sentinel in a log analytics works
 
 ## Tools Used
 
-Microsoft Sentinel (standalone), Microsoft Sentinel in Microsoft Defender
+Microsoft Sentinel (Azure Portal), Microsoft Defender XDR Portal
 
 
 ## Lab Setup
@@ -70,9 +70,20 @@ Note: If the DCR is created within the Microsoft Sentinel theWindows event log d
 
 With the completion of the configuration of the connector, the staus of the connector now changes to connected, meaning, the agents are now installed on the target resources and are now ready to start collecting logs for fowarding to the Sentinel-integrated workspace. The images also features both the table management and DCR properties.
 
-After the configuration was completed, I noticed the workspace wasn't receving logs despite the status of the connector showing connected. With my fervent troubleshoot, I realised the VMs are behind a firewall (In the last project the firewall was deployed to control the outbound traffic of the VMs, thus affecting the ability of the agent on the VMs to send logs to the Sentinel-integrated workspace). Allowing the firewall to grant access to the traffic requires understanding how traffic is routed from the agents to the workspace to know which service to pass. 
-
 ![image](Images/SC-WSE.png)
+
+After the configuration was completed, I noticed the workspace wasn't receving logs despite the status of the connector showing connected. With my fervent troubleshoot, I realised the VMs are behind a firewall (In the last project the firewall was deployed to control the outbound traffic of the VMs, thus affecting the ability of the agent on the VMs to send logs to the Sentinel-integrated workspace). Allowing the firewall to grant access to the traffic requires understanding how traffic is routed from the agents to the workspace.
+Typically, the traffic is routed from the VM to the Azure Monitor endpoint on the internet and the to the workspace. Hence, allow the traffic to pass we require granting access to Azure Monitor through the firewall policy.
+
+![image](Images/FWBP.png)
+
+The network rule is use to grant the log traffic access to Azure Monitor by specifying it as a service tag.
+
+![image](Images/FWBP2.png)
+
+After the configuration, it is observed that the agent is now sending logs to the Sentinel-integrated workspace.
+
+![image](Images/VML.png)
 
 ## Findings and Recommendations
 

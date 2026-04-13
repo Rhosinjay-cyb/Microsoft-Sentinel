@@ -68,7 +68,7 @@ this allows for the specyfing of the target resources (VMs) and the events to co
 
 ![image](Images/VM2M.png)
 
-The completion of thecreation of DCR automatically installs a AzureMonitorWindowsAgent extension on the VMs.
+The completion of the creation of DCR automatically installs a AzureMonitorWindowsAgent extension on the VMs.
 
 ![image](Images/SUC.png)
 

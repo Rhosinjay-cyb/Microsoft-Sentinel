@@ -105,7 +105,7 @@ The brute-force attack occurred due to the remote desktop protocol (RDP) port th
 
 ![image](Images/BRDP.png)
 
-Another recommended way of preventing the attack is to restrict the source IPs to approved IP address instead of any IP in the DNAT rule. This will prevent the attacker from connecting to the VM through the firewall's public IP while leaving the RDP port exposed to the internet.
+Another recommended way of preventing the attack is to restrict the source IPs to certain approved IP addresses instead of any IP address in the DNAT rule. This will prevent the attacker from establishing a connection to the VM through the firewall's public IP while the RDP port is still exposed to the internet.
 
 ### 3. Creation of Analytics Rule
 

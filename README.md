@@ -143,13 +143,7 @@ Having simulated the security threat, the analytics rule returns an alert after 
 ![image](Images/ALT4.png)
 
 
-## Findings and Recommendations
-
-
-
-## Implementation of Recommendations
-
-
+### SOAR Implementation
 
 ## Conclusion
 

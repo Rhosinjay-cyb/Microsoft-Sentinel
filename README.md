@@ -222,3 +222,6 @@ multiple log sources to provide comprehensive visibility, enable cross-source co
 
 Having explored some of the key areas of Microsoft Sentinel including log ingestion, KQL querying, analytics rule creation, incident investigation and automation using playbooks during this project, and being able to complete the tasks involved efficiently, it indicates my solid-level of familiarity and hands-on experience with Microsoft Sentinel as a tool for cybersecurity analysis. Going forward, additional projects will focus on deepening expertise in incident investigation and enhancing automation capabilities through the implementation of more advanced playbooks for security operation.
 
+## Past Project
+
+https://rhosinjay-cyb.github.io/Azure-Firewall/

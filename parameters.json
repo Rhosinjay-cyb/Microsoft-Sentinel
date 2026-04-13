@@ -1,0 +1,87 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "connections_arm_name": {
+            "value": null
+        },
+        "connections_gmail_1_name": {
+            "value": null
+        },
+        "connections_office365_name": {
+            "value": null
+        },
+        "virtualMachines_HR_VM_name": {
+            "value": null
+        },
+        "virtualMachines_Dev_VM_name": {
+            "value": null
+        },
+        "routeTables_Project_RT_name": {
+            "value": null
+        },
+        "publicIPAddresses_FWPIP_name": {
+            "value": null
+        },
+        "connections_azuresentinel_1_name": {
+            "value": null
+        },
+        "workflows_Send_basic_email_name": {
+            "value": null
+        },
+        "bastionHosts_Project_BST_name": {
+            "value": null
+        },
+        "publicIPAddresses_FWMPIP_name": {
+            "value": null
+        },
+        "networkInterfaces_hr_vm259_name": {
+            "value": null
+        },
+        "networkInterfaces_dev_vm695_name": {
+            "value": null
+        },
+        "firewallPolicies_Project_FWP_name": {
+            "value": null
+        },
+        "virtualNetworks_Project_Vnet_name": {
+            "value": null
+        },
+        "connections_o365_Send_basic_email_name": {
+            "value": null
+        },
+        "publicIPAddresses_Project_BPIP_name": {
+            "value": null
+        },
+        "networkSecurityGroups_HRVMnsg511_name": {
+            "value": null
+        },
+        "networkSecurityGroups_DevVMnsg945_name": {
+            "value": null
+        },
+        "connections_azuresentinel_Send_basic_email_name": {
+            "value": null
+        },
+        "workspaces_Project_workspace_name": {
+            "value": null
+        },
+        "connections_azuresentinel_Project_BST_Playbook_name": {
+            "value": null
+        },
+        "dataCollectionRules_Project_securityevents_name": {
+            "value": null
+        },
+        "workflows_Send_email_with_formatted_incident_report_name": {
+            "value": null
+        },
+        "connections_o365_Send_email_with_formatted_incident_report_name": {
+            "value": null
+        },
+        "solutions_SecurityInsights_project_workspace__name": {
+            "value": null
+        },
+        "connections_azuresentinel_Send_email_with_formatted_incident_report_name": {
+            "value": null
+        }
+    }
+}

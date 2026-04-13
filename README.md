@@ -99,7 +99,7 @@ The rule is created to run automatically after it was created. Since the threat 
 
 An analytics rule is also created for the rest of the other logs to detect security threats in those resources.
 
-Firstly, the Azure activity, this registers any creation or updates on resources and services within the subscription. In this case, we want to use it to monitor the firewall policies, ensuring admins with access do not modify the policies unnoticed, thereby sabotging the security solution.  The KQL query for the detection of the security threat isshown in the image below
+Firstly, the Azure activity, this registers any creation or updates on resources and services within the subscription. In this case, we want to use it to monitor the firewall policies, ensuring admins with access do not modify the policies unnoticed, thereby sabotging the security solution.  To simulate a security threat, the firewall policy was modified and the KQL query was used for the detection of the security threat.
 
 ![image](Images/CR2.png)
 

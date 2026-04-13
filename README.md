@@ -33,6 +33,8 @@ The project commenced with the deployment of Microsoft Sentinel in the Project-w
 
 ![image](Images/SEN.png)
 
+### Ingestion of Logs
+
 Afterwards, Azure Bastion logs is forwarded to the Sentinel-integrated workspace via diagnostic settings (Project-BST-logs)
 
 ![image](Images/BSTL.png)
@@ -84,6 +86,8 @@ The network rule is use to grant the log traffic access to Azure Monitor by spec
 After the configuration, it is observed that the agent is now sending logs to the Sentinel-integrated workspace.
 
 ![image](Images/VML.png)
+
+### Creation of Analytics Rule
 
 The following task is the creation of analytics rule to detect securrity threat from the various logs ingested into Sentinel-integrated workspace. First of all, a security threat was simulated and an analytics rule was created to detect it. Starting with Azure Bastion, another public IP was used to connect to the VM via Bastion. Then a KQL query was written to detect it. Afterwards, the query was used to create a rule which will fire an alert next time a different public IP is used other than the trusted IP.
 
@@ -143,7 +147,7 @@ Having simulated the security threat, the analytics rule returns an alert after 
 ![image](Images/ALT4.png)
 
 
-### SOAR Implementation
+### Implementation of SOAR
 
 ## Conclusion
 

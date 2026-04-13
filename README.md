@@ -106,7 +106,7 @@ Firstly, the Azure activity, this registers any creation or updates on resources
 
 The creation of an alert rule from the query
 
-![image](Images/RL.png)
+![image](Images/RL2.png)
 
 The generation of an alert with the rule
 
@@ -122,14 +122,25 @@ Afterwards, the query was optimized reducing false positives and removing noisy 
 
 ![image](Images/CR3.2.png)
 
-Followed with the creation of alert rule
+Followed with the creation of analytics rule
 
 ![image](Images/RL3.png)
 
-... and the generation of an alert.
+... and the generation of an alert with the analytics rule
 
 ![image](Images/ALT3.png)
 
+The last part is the creation of an analytics rule to detect security threats in the VMs. This started with the scenario of a user trying to access the VM and having tried multipled passwords, the user was able to gain access. This is important because it could either be that a legitmate user already forgot his password or unauthorized user is trying to gain access. This therefore requires a proper observation as quick as possible. The KQL query for the task is shown in the following image.
+
+![image](Images/CR4.png)
+
+Then, the creation of analytics rule with the query.
+
+![image](Images/RL4.png)
+
+Having simulated the security threat, the analytics rule returns an alert after the rule creation was completed.
+
+![image](Images/ALT4.png)
 
 
 ## Findings and Recommendations

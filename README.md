@@ -101,7 +101,7 @@ In some cases, the language used in the username and some other unique features 
 
 ![image](Images/FLO2.png)
 
-The brute-force attack occurred due to the remote desktop protocol (RDP) port that was exposed to the internet, even though the traffic to the port was routed through the firewall. From my analysis, the source IP of the attack is from the AzureFirewallSubnet, meaning the attacker connected to the firewall through its public IP because the DNAT rule allows connection from any IP address which then translates the connection to the affected VMs. However, I mentioned in my last project that Azure Bastion is more secured for remote connections to VMs compared to direct connection via RDP. Finally, the attack was remediated by blocking the exposure of RDP to the internet.
+The brute-force attack occurred due to the remote desktop protocol (RDP) port that was exposed to the internet, even though the traffic to the port was routed through the firewall. From my analysis, the source IP of the attacker is from the AzureFirewallSubnet address space. The attacker was able to attempt to connect to the VM through the firewall's public IP because the DNAT rule allows connection from any IP address but the connection was not successful. This makes Azure Bastion a prefferable option for secured remote connections to VMs compared to direct connection via RDP. Lastly, the attack was remediated by blocking the exposure of RDP port to the internet.
 
 ![image](Images/BRDP.png)
 

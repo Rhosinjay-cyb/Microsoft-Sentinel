@@ -97,6 +97,41 @@ The rule is created to run automatically after it was created. Since the threat 
 
 ![image](Images/ALT.png)
 
+An analytics rule is also created for the rest of the other logs to detect security threats in those resources.
+
+Firstly, the Azure activity, this registers any creation or updates on resources and services within the subscription. In this case, we want to use it to monitor the firewall policies, ensuring admins with access do not modify the policies unnoticed, thereby sabotging the security solution.  The KQL query for the detection of the security threat isshown in the image below
+
+![image](Images/CR2.png)
+
+
+The creation of an alert rule from the query
+
+![image](Images/RL.png)
+
+The generation of an alert with the rule
+
+![image](Images/ALT2.png)
+
+The next one is the firewall logs, particularly the application rule. The AZFWApplicationRule table contains the log data of the application rule and this was queried to gain context into the restricted web apps that users aim to connect to, which were of course denied. 
+
+The first KQL for the detection was not that effective due to the inclusion of the domain of other background services.
+
+![image](Images/CR3.png)
+
+Afterwards, the query was optimized reducing false positives and removing noisy domains.
+
+![image](Images/CR3.2.png)
+
+Followed with the creation of alert rule
+
+![image](Images/RL3.png)
+
+... and the generation of an alert.
+
+![image](Images/ALT3.png)
+
+
+
 ## Findings and Recommendations
 
 

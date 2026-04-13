@@ -97,15 +97,15 @@ Aside check successful logins to the VMs, I also checked for failed logins to th
 
 ![image](Images/FLO.png)
 
-Sometimes, the language in which the username are written and some other unique features might provide a clue on the source of the attack or the demography of the attacker. 
+In some cases, the language used in the username and some other unique features might provide a clue on the source of the attack or the demographic profile of the attacker. 
 
 ![image](Images/FLO2.png)
 
-The brute force attack was due to the RDP port that was exposed to the internet, even though the traffic was routed through the firewall. From my analysis, the source IP of the attack is from the AzurFirewallSubnet, meaning the attacker connected to the firewall through its public IP because the DNAT rule allows connection from every source which then translate the connection to the affected VMs.  I earlier pointed it out in my last project that Azure Bastion is more secured compared to connecting to the VMs with direct RDP exposure. The attack was remediated by blocking the exposure of RDP to the internet.
+The brute-force attack occurred due to the remote desktop protocol (RDP) port that was exposed to the internet, even though the traffic to the port was routed through the firewall. From my analysis, the source IP of the attack is from the AzureFirewallSubnet, meaning the attacker connected to the firewall through its public IP because the DNAT rule allows connection from any IP address which then translates the connection to the affected VMs. However, I mentioned in my last project that Azure Bastion is more secured for remote connections to VMs compared to direct connection via RDP. Finally, the attack was remediated by blocking the exposure of RDP to the internet.
 
 ![image](Images/BRDP.png)
 
-Another subtle way of preventing the attack is to allow only my local computer's public IP in the DNAT rule instead of any IP. This will prevent the attacker from connecting to the firewall while leaving the RDP port exposed to the internet.
+Another recommended way of preventing the attack is to restrict the source IPs to approved IP address instead of any IP in the DNAT rule. This will prevent the attacker from connecting to the VM through the firewall's public IP while leaving the RDP port exposed to the internet.
 
 ### 3. Creation of Analytics Rule
 

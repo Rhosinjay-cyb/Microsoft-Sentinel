@@ -85,6 +85,18 @@ After the configuration, it is observed that the agent is now sending logs to th
 
 ![image](Images/VML.png)
 
+The following task is the creation of analytics rule to detect securrity threat from the various logs ingested into Sentinel-integrated workspace. First of all, a security threat was simulated and an analytics rule was created to detect it. Starting with Azure Bastion, another public IP was used to connect to the VM via Bastion. Then a KQL query was written to detect it. Afterwards, the query was used to create a rule which will fire an alert next time a different public IP is used other than the trusted IP.
+
+![image](Images/CR.png)
+
+The type of alert rule created here is an scheduled rule, meaning the query runs at a specified interval to detect security threats. Here the name of the alert is specified among other steps. An essential part in the creation of the alert rule is the entity mapping which enriches the alert by adding further information about the details of alert, providing a clear context about the alert, at the same time making it easier to be remediated.
+
+![image](Images/RL.png)
+
+The rule is created to run automatically after it was created. Since the threat had already been simulated, the running of the query generates an alert.
+
+![image](Images/ALT.png)
+
 ## Findings and Recommendations
 
 

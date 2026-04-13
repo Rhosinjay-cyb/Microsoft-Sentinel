@@ -64,7 +64,7 @@ this allows for the specyfing of the target resources (VMs) and the events to co
 
 The completion of DCR automatically installs a AzureMonitorWindowsAgent extension on the VMs.
 
-![image](Images/SUC2.png)
+![image](Images/SUC.png)
 
 Note: If the DCR is created within the Microsoft Sentinel theWindows event log data will be stored in the SecurityEvent table, but if the DCR is created in the DCRs environment the event will be stored in the Event table without specialized security solution.
 

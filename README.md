@@ -33,7 +33,7 @@ The project commenced with the deployment of Microsoft Sentinel in the Project-w
 
 ![image](Images/SEN.png)
 
-### Ingestion of Logs
+### 1. Ingestion of Logs
 
 Afterwards, Azure Bastion logs is forwarded to the Sentinel-integrated workspace via diagnostic settings (Project-BST-logs)
 
@@ -87,13 +87,13 @@ After the configuration, it is observed that the agent is now sending logs to th
 
 ![image](Images/VML.png)
 
-#### Detected Brute-Force attack
+#### 1.1. Detected Brute-Force attack
 
 Aside check successful logins to the VMs, I also checked for failed logins to the VM, and something interesting played out. I detected a live brute-force attack. I could see multiple usernames in the range of hundreds being tried just within a few seconds. Apparently, the attack has been going on before I could gain access to the security event data of the VMs. This experience alone instilled the significance of monitoring with SIEM solutions. 
 
 ![image](Images/FLO.png)
 
-Sometimes, the language in which the username are written and some other unique features might provide a clue on the source of the attack or who the attacker is. 
+Sometimes, the language in which the username are written and some other unique features might provide a clue on the source of the attack or demography of the attacker. 
 
 ![image](Images/FLO2.png)
 
@@ -103,7 +103,7 @@ The brute force attack was due to the RDP port that was exposed to the internet,
 
 Another subtle way of preventing the attack is to allow only my local computer's public IP in the DNAT rule instead of any IP. This will prevent the attacker from connecting to the firewall while leaving the RDP port exposed to the internet.
 
-### Creation of Analytics Rule
+### 2. Creation of Analytics Rule
 
 The following task is the creation of analytics rule to detect securrity threat from the various logs ingested into Sentinel-integrated workspace. First of all, a security threat was simulated and an analytics rule was created to detect it. Starting with Azure Bastion, another public IP was used to connect to the VM via Bastion. Then a KQL query was written to detect it. Afterwards, the query was used to create a rule which will fire an alert next time a different public IP is used other than the trusted IP.
 
@@ -162,8 +162,11 @@ Having simulated the security threat, the analytics rule returns an alert after 
 
 ![image](Images/ALT4.png)
 
-Note: There also inbuilt analytics rule
-### Implementation of SOAR
+Note: There are also inbuilt analytics rule that comes with the data connectors, for instance Azure Activity data connector has 14 analytics rule which could be used to facilitate threat detection. These rules serving as a foundation could also be modified to suit your application. However, I decided to create my own rule from KQL queries because I needed to be sure that the rule can detect the simulated attack before going ahead with the creation of the analytics rule.
+
+![image](Images/IBAR.png)
+
+### 3. Implementation of SOAR
 
 ## Conclusion
 

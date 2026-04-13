@@ -87,6 +87,22 @@ After the configuration, it is observed that the agent is now sending logs to th
 
 ![image](Images/VML.png)
 
+#### Detected Brute-Force attack
+
+Aside check successful logins to the VMs, I also checked for failed logins to the VM, and something interesting played out. I detected a live brute-force attack. I could see multiple usernames in the range of hundreds being tried just within a few seconds. Apparently, the attack has been going on before I could gain access to the security event data of the VMs. This experience alone instilled the significance of monitoring with SIEM solutions. 
+
+![image](Images/FLO.png)
+
+Sometimes, the language in which the username are written and some other unique features might provide a clue on the source of the attack or who the attacker is. 
+
+![image](Images/FLO2.png)
+
+The brute force attack was due to the RDP port that was exposed to the internet, even though the traffic was routed through the firewall. From my analysis, the source IP of the attack is from the AzurFirewallSubnet, meaning the attacker connected to the firewall through its public IP because the DNAT rule allows connection from every source which then translate the connection to the affected VMs.  I earlier pointed it out in my last project that Azure Bastion is more secured compared to connecting to the VMs with direct RDP exposure. The attack was remediated by blocking the exposure of RDP to the internet.
+
+![image](Images/BRDP.png)
+
+Another subtle way of preventing the attack is to allow only my local computer's public IP in the DNAT rule instead of any IP. This will prevent the attacker from connecting to the firewall while leaving the RDP port exposed to the internet.
+
 ### Creation of Analytics Rule
 
 The following task is the creation of analytics rule to detect securrity threat from the various logs ingested into Sentinel-integrated workspace. First of all, a security threat was simulated and an analytics rule was created to detect it. Starting with Azure Bastion, another public IP was used to connect to the VM via Bastion. Then a KQL query was written to detect it. Afterwards, the query was used to create a rule which will fire an alert next time a different public IP is used other than the trusted IP.

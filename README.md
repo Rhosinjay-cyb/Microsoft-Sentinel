@@ -4,11 +4,11 @@ Managing Security Operations with Microsoft Sentinel
 
 ## Objective
 
-The aim of this project is to deploy Microsoft Sentinel in a log analytics workspace to leverage its SIEM and SOAR capabilities to manage security operations, ranging from collection of logs from various Azure services and resources to remediation of threat with playbooks.
+The aim of this project is to deploy Microsoft Sentinel in a log analytics workspace to leverage its security information and event management (SIEM) and security orchestration and automation response (SOAR) capabilities to manage security operations, ranging from collection of logs from various Azure services and resources to remediation of threat with playbooks.
 
 ## Tools Used
 
-Microsoft Sentinel (Azure Portal), Microsoft Defender XDR Portal
+Microsoft Sentinel (Azure Portal), Microsoft Defender Portal
 
 
 ## Lab Setup
@@ -25,15 +25,15 @@ Microsoft Sentinel (Azure Portal), Microsoft Defender XDR Portal
 
 ## Preamble
 
-This project builds upon a previously concluded project on Azure Firewall, and it focuses on the security operations aspect of the security solution, including logging, monitoring, threat detection and incident remediation. Where required, references will be made to the former project; however, all underlying concepts and configurations will be clearly explained to ensure completeness and clarity. Azure firewall was deployed in the last project alongside other Azure services and resources (Azure Bastion, Virtual Machines, Log Analytics Workspace) to form a security solution. This project now aims to monitor and enhance the resilience of the security solution by ingesting logs from the Azure firewall, Azure Bastion, VMs and Azure activity into a sentinel-integrated workspace to support threat detection and remediation of security incident.
+This project builds upon a previously concluded project on Azure Firewall, and it focuses on the security operations (SecOps) aspect of the security solution, including logging, monitoring, threat detection and incident remediation. Where required, references will be made to the former project; however, all underlying concepts and configurations will be clearly explained to ensure clarity. Azure firewall was deployed in the last project alongside other Azure services and resources (Azure Bastion, Virtual Machines, Log Analytics Workspace) to form a security solution. This project now aims to monitor the security solution to enhance its efficiency and resilience by ingesting logs from the Azure firewall, Azure Bastion, virtual machines (VMs) and the Azure subscription into a sentinel-integrated workspace to enable comprehensive security monitoring and effective threat detection across the environment. Logs from Azure Firewall will be used to monitor network traffic and web access to detect access to restricted or malicious websites. On the other hand logs from Azure Bastion will be used to monitor remote access activity to detect ununsual or unauthorized access. Azure activity will be used to monitor control plane actions to detect tampering with the configuration, for instance, modification of firewall policy, while VMs' logs will be used to monitor operating system and user-level events to detect brute-force and account compromise among other attacks.
 
 ## Steps Taken
 
-The project was completed in the following order.
+The project was implemented in the following order.
 
 ### 1. Deployment of Microsoft Sentinel
 
-The project commenced with the deployment of Microsoft Sentinel in the Project-workspace (this log analytics workspace was created in the last project and it already contains the Azure Firewall logs).  
+The project commenced with the deployment of Microsoft Sentinel in Project-workspace (this log analytics workspace was created in the last project and it has already being configured to receive Azure Firewall logs) to have a Sentinel-integrated workspace 
 
 ![image](Images/SEN.png)
 
@@ -47,7 +47,7 @@ The Azure Bastion logs are stored in the MicrosoftAzureBastionAuditLogs table in
 
 ![image](Images/BSTL2.png)
 
-Additionally, Azure activity log which stores the event carried out in the Azure subscription including any updates made on the firewallis forwarded to the sentinel-integrated workspace via Azure Activity connector. The process started with the installation of Azure Activity from content hub and culminated with the configuration of the connector.
+Additionally, Azure activity log which records the activities carried out in the Azure subscription including any updates made on the firewall is forwarded to the sentinel-integrated workspace via Azure Activity connector. The process started with the installation of Azure Activity connector from content hub and culminated with the configuration of the connector.
 
 ![image](Images/AzAC.png)
 
@@ -55,7 +55,7 @@ The Azure activity logs are now visible from the sentinel-integrated workspace a
 
 ![image](Images/AAL.png)
 
-To ingest the logs from the virtual machines to the sentinel-integrated workspace, Window Security Event solution is installed from Content hub.
+To ingest logs from the virtual machines to the sentinel-integrated workspace, Window Security Event solution is installed from Content hub.
 
 ![image](Images/WSE.png)
 
@@ -68,36 +68,36 @@ this allows for the specyfing of the target resources (VMs) and the events to co
 
 ![image](Images/VM2M.png)
 
-The completion of DCR automatically installs a AzureMonitorWindowsAgent extension on the VMs.
+The completion of thecreation of DCR automatically installs a AzureMonitorWindowsAgent extension on the VMs.
 
 ![image](Images/SUC.png)
 
-Note: If the DCR is created within the Microsoft Sentinel theWindows event log data will be stored in the SecurityEvent table, but if the DCR is created in the DCRs environment the event will be stored in the Event table without specialized security solution.
+Note: If the DCR is created within the Microsoft Sentinel the Windows event log data will be stored in the SecurityEvent table, but if the DCR is created in the DCRs environment the event will be stored in the Event table without specialized security solution.
 
-With the completion of the configuration of the connector, the staus of the connector now changes to connected, meaning, the agents are now installed on the target resources and are now ready to start collecting logs for fowarding to the Sentinel-integrated workspace. The images also features both the table management and DCR properties.
+With the completion of the configuration of the connector, the staus of the connector now changes to connected, meaning, the agents are now installed on the target resources, and are now ready to start collecting logs for fowarding to the Sentinel-integrated workspace. The images also features both the table management and DCR properties.
 
 ![image](Images/SC-WSE.png)
 
-After the configuration was completed, I noticed the workspace wasn't receving logs despite the status of the connector showing connected. With my fervent troubleshoot, I realised the VMs are behind a firewall (In the last project the firewall was deployed to control the outbound traffic of the VMs, thus affecting the ability of the agent on the VMs to send logs to the Sentinel-integrated workspace). Allowing the firewall to grant access to the traffic requires understanding how traffic is routed from the agents to the workspace.
-Typically, the traffic is routed from the VM to the Azure Monitor endpoint on the internet and the to the workspace. Hence, allow the traffic to pass we require granting access to Azure Monitor through the firewall policy.
+After the configuration was completed, I noticed the workspace wasn't receving logs despite the status of the connector showing connected. With my fervent troubleshoot, I realised the VMs are behind a firewall (In the last project the firewall was deployed to control the outbound traffic of the VMs, thus affecting the ability of the agent on the VMs to send logs to the Sentinel-integrated workspace). Allowing the firewall to grant access to the traffic requires understanding how traffic is routed from the agents to the Sentinel-integrated workspace.
+Typically, the traffic is routed from the VM to the Azure Monitor endpoint on the internet and then to the workspace. Therefore, granting the agents access to the Azure Monitor endpoint will resolve the issue.
 
 ![image](Images/FWBP.png)
 
-The network rule is use to grant the log traffic access to Azure Monitor by specifying it as a service tag.
+The network rule is use to permit the agent's traffic to access to Azure Monitor by specifying Azure Monitor as a service tag in the rule.
 
 ![image](Images/FWBP2.png)
 
-After the configuration, it is observed that the agent is now sending logs to the Sentinel-integrated workspace.
+After the configuration, it is observed that the agents on both VMs are now sending logs to the Sentinel-integrated workspace.
 
 ![image](Images/VML.png)
 
 #### 2.1. Detected Brute-Force attack
 
-Aside check successful logins to the VMs, I also checked for failed logins to the VM, and something interesting played out. I detected a live brute-force attack. I could see multiple usernames in the range of hundreds being tried just within a few seconds. Apparently, the attack has been going on before I could gain access to the security event data of the VMs. This experience alone instilled the significance of monitoring with SIEM solutions. 
+Aside check successful logins to the VMs, I also checked for failed logins to the VM, and something interesting played out. I detected a live brute-force attack. I could see multiple usernames in the range of hundreds being tried just within a few seconds. Apparently, the attack has been going on before I could gain access to the security event data of the VMs. This experience alone instilled the significance of comprehensive visibility across the IT environment.
 
 ![image](Images/FLO.png)
 
-Sometimes, the language in which the username are written and some other unique features might provide a clue on the source of the attack or demography of the attacker. 
+Sometimes, the language in which the username are written and some other unique features might provide a clue on the source of the attack or the demography of the attacker. 
 
 ![image](Images/FLO2.png)
 

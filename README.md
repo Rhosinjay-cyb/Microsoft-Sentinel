@@ -47,7 +47,7 @@ The Azure Bastion logs are stored in the MicrosoftAzureBastionAuditLogs table in
 
 ![image](Images/BSTL2.png)
 
-Additionally, Azure activity log which records the activities carried out in the Azure subscription including any updates made on the firewall is forwarded to the sentinel-integrated workspace via Azure Activity connector. The process started with the installation of Azure Activity connector from content hub and culminated with the configuration of the connector.
+Additionally, AzureActivity log which contains the activities carried out in the Azure subscription including any updates made on the firewall, is forwarded to the sentinel-integrated workspace via Azure Activity connector. The process started with the installation of Azure Activity connector from content hub and was rounded-off with the configuration of the connector.
 
 ![image](Images/AzAC.png)
 
@@ -109,11 +109,11 @@ Another recommended way of preventing the attack is to restrict the source IPs t
 
 ### 3. Creation of Analytics Rule
 
-The following task is the creation of analytics rule to detect securrity threat from the various logs ingested into Sentinel-integrated workspace. First of all, a security threat was simulated and an analytics rule was created to detect it. Starting with Azure Bastion, another public IP was used to connect to the VM via Bastion. Then a KQL query was written to detect it. Afterwards, the query was used to create a rule which will fire an alert next time a different public IP is used other than the trusted IP.
+The following task is the creation of analytics rule to detect securrity threat from the multiple logs ingested into the Sentinel-integrated workspace. First of all, a security threat was simulated and an analytics rule was created to detect it. Starting with Azure Bastion, another public IP was used to connect to the VM via Bastion, simulating a scenario whereby an unusual or anonymous IP is connecting to the VMs via Azure Bastion implying a security threat. Then a kusto query language (KQL) query was written to detect it. Afterwards, the query was used to create an analytics rule which will fire an alert next time a different public IP other than the trusted IP is used.
 
 ![image](Images/CR.png)
 
-The type of alert rule created here is an scheduled rule, meaning the query runs at a specified interval to detect security threats. Here the name of the alert is specified among other steps. An essential part in the creation of the alert rule is the entity mapping which enriches the alert by adding further information about the details of alert, providing a clear context about the alert, at the same time making it easier to be remediated.
+The type of alert rule created here is a scheduled rule, meaning the query runs at a specified interval to detect security threats. Here the name of the alert is specified (Unusual IP -Bastion Access) among other steps. An essential part in the creation of the alert rule is the entity mapping which enriches the alert by adding further information about the details of alert, providing a clear context about the alert to support its investigation, at the same time, making it easier to be remediated.
 
 ![image](Images/RL.png)
 
@@ -123,22 +123,22 @@ The rule is created to run automatically after it was created. Since the threat 
 
 An analytics rule is also created for the rest of the other logs to detect security threats in those resources.
 
-Firstly, the Azure activity, this registers any creation or updates on resources and services within the subscription. In this case, we want to use it to monitor the firewall policies, ensuring admins with access do not modify the policies unnoticed, thereby sabotging the security solution.  To simulate a security threat, the firewall policy was modified and the KQL query was used for the detection of the security threat.
+The AzureActivity table records the creation or updates of resources and services within the subscription. In this case, monitoring the firewall policies, ensuring tampering with the configurations of the firewall policies do not go unnoticed, thereby preventing the sabotaging the security solution. To simulate a security threat, the firewall policy was modified and the KQL query was used for the detection of the security threat.
 
 ![image](Images/CR2.png)
 
 
-The creation of an alert rule from the query
+The creation of an analytics rule (Firewall Policy Modified) from the query
 
 ![image](Images/RL2.png)
 
-The generation of an alert with the rule
+The generation of an alert with the analytics rule
 
 ![image](Images/ALT2.png)
 
 The next one is the firewall logs, particularly the application rule. The AZFWApplicationRule table contains the log data of the application rule and this was queried to gain context into the restricted web apps that users aim to connect to, which were of course denied. 
 
-The first KQL for the detection was not that effective due to the inclusion of the domain of other background services.
+The first KQL for the detection of the threat was not that effective due to the inclusion of the domains of other background services.
 
 ![image](Images/CR3.png)
 
@@ -146,7 +146,7 @@ Afterwards, the query was optimized reducing false positives and removing noisy 
 
 ![image](Images/CR3.2.png)
 
-Followed with the creation of analytics rule
+Followed with the creation of analytics rule (Restricted WebApp Accessed)
 
 ![image](Images/RL3.png)
 

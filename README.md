@@ -25,7 +25,7 @@ Microsoft Sentinel (Azure Portal), Microsoft Defender XDR Portal
 
 ## Preamble
 
-This project builds upon a previously concluded project on Azure Firewall, and it focuses on the security operations aspect of the security solution, including logging, monitoring, threat detection and incident remediation. Where required, references will be made to the former project; however, all underlying concepts and configurations will be clearly explained to ensure completeness and clarity. 
+This project builds upon a previously concluded project on Azure Firewall, and it focuses on the security operations aspect of the security solution, including logging, monitoring, threat detection and incident remediation. Where required, references will be made to the former project; however, all underlying concepts and configurations will be clearly explained to ensure completeness and clarity. Azure firewall was deployed in the last project alongside other Azure services and resources (Azure Bastion, Virtual Machines, Log Analytics Workspace) to form a security solution. This project now aims to monitor and enhance the resilience of the security solution by ingesting logs from the Azure firewall, Azure Bastion, VMs and Azure activity into a sentinel-integrated workspace to support threat detection and remediation of security incident.
 
 ## Steps Taken
 

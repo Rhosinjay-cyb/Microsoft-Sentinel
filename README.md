@@ -24,7 +24,7 @@ Microsoft Sentinel (Azure Portal), Microsoft Defender Portal
 
 ![image](Images/MS.drawio.png)
 
-## Preamble
+## Background Information
 
 This project builds upon a previously concluded project on Azure Firewall, and it focuses on the security operations (SecOps) aspect of the security solution, including logging, monitoring, threat detection and incident remediation. Where required, references will be made to the former project; however, all underlying concepts and configurations will be clearly explained to ensure clarity. Azure firewall was deployed in the last project alongside other Azure services and resources (Azure Bastion, Virtual Machines, Log Analytics Workspace) to form a security solution. This project now aims to monitor the security solution to enhance its efficiency and resilience by ingesting logs from the Azure firewall, Azure Bastion, virtual machines (VMs) and the Azure subscription into a sentinel-integrated workspace to enable comprehensive security monitoring and effective threat detection across the environment. Logs from Azure Firewall will be used to monitor network traffic and web access to detect access to restricted or malicious websites. On the other hand logs from Azure Bastion will be used to monitor remote access activity to detect ununsual or unauthorized access. Azure activity will be used to monitor control plane actions to detect tampering with the configuration, for instance, modification of firewall policy, while VMs' logs will be used to monitor operating system and user-level events to detect brute-force and account compromise among other attacks.
 

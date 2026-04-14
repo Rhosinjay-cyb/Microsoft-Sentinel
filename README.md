@@ -1,6 +1,6 @@
 ## Project Title
 
-Managing Security Operations with Microsoft Sentinel
+Managing Security Operations with Microsoft Sentinel and Microsoft Defender
 
 ## Objective
 
